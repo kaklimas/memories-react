@@ -1,18 +1,25 @@
-import React from "react";
-import memories from './images/memories.png';
-import Posts from './components/Posts/Posts.js';
-import Form from './components/Form/Form.js';
-import 'bootstrap/dist/css/bootstrap.min.css'
+import logo from './logo.svg';
+import './App.css';
 
-const App = () => {
-    return (
-        <div class="container-md">
-            <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-primary">Left</button>
-                <button type="button" class="btn btn-primary">Middle</button>
-                <button type="button" class="btn btn-primary">Right</button>
-            </div>
-        </div>
-    )
-};
+function App() {
+  return (
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
+    </div>
+  );
+}
+
 export default App;
