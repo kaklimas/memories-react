@@ -15,7 +15,8 @@ const FormDiv = styled.div`
 function Form() {
   return (
     <FormDiv>
-        <form>
+        <div className='section-title' style={{textAlign: 'center', marginBottom: 20}}><h3>Creating memory</h3></div>
+        <form>            
             <div className='mb-3'>
                 <input type="text" className="form-control" id="creatorName" placeholder='Creator'></input>
             </div>
@@ -33,7 +34,9 @@ function Form() {
             </div>
             
 
-            <button type="submit" className="btn btn-primary">Submit</button>
+            <button type="submit" className="btn btn-primary" style={{width: '100%'}}>Submit</button>
+            <button className="btn btn-danger" style={{width: '100%', marginTop: 10}}>Clear</button>
+                  
         </form>
     </FormDiv>
   )

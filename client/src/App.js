@@ -42,6 +42,7 @@ const beachCard = {
   title: "Holidays together",
   content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   creator: "Maria Adam",
+  tags: ["holidays", "summer", "vacation"],
   src: beachImg,
   date: new Date()
 }
@@ -49,6 +50,7 @@ const dadsCard = {
   title: "Summer with my kiddo",
   content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   creator: "Aston Martin",
+  tags: ["holidays", "summer", "vacation"],
   src:dadsImg,
   date: new Date()
 }
@@ -56,6 +58,7 @@ const christmasCard = {
   title: "Ugly winter",
   content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
   creator: "Jhon Doe",
+  tags: ["disaster", "winter", "ugly"],
   src: christmasImg,
   date: new Date()
 }
