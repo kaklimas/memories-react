@@ -39,7 +39,7 @@ function Card({card}) {
     if (minutesDiff > 0){
       return `Posted ${minutesDiff} minutes ago`
     }
-    return `Posted ${now.getSeconds - card.date.getSeconds} seconds ago`
+    return `Posted ${now.getSeconds() - card.date.getSeconds()} seconds ago`
   }
   const getTags = () => {
     return (card.tags.map(tag => <p>{`#${tag}`}</p>))

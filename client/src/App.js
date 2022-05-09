@@ -1,13 +1,10 @@
 import React from "react";
 
-import Card from "./components/Card";
 import styled from "styled-components";
 import Form from "./components/Form";
-// sample imgs
-import beachImg from './img/beach.png'
-import dadsImg from './img/father.png'
-import christmasImg from './img/christmas.png'
+
 import memoriesImg from './img/memories.png'
+import CardBox from "./components/CardBox";
 
 
 const MergedDiv = styled.div`
@@ -39,49 +36,17 @@ const ContainerDiv = styled.div`
   padding-top:20px;
 `
 
-const beachCard = {
-  title: "Holidays together",
-  content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  creator: "Maria Adam",
-  tags: ["holidays", "summer", "vacation"],
-  src: beachImg,
-  date: new Date()
-}
-const dadsCard = {
-  title: "Summer with my kiddo",
-  content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  creator: "Aston Martin",
-  tags: ["holidays", "summer", "vacation"],
-  src:dadsImg,
-  date: new Date()
-}
-const christmasCard = {
-  title: "Ugly winter",
-  content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
-  creator: "Jhon Doe",
-  tags: ["disaster", "winter", "ugly"],
-  src: christmasImg,
-  date: new Date()
-}
-
-const sampleCards = [beachCard, dadsCard, christmasCard, beachCard, dadsCard, christmasCard,
-  beachCard, dadsCard, christmasCard, beachCard, dadsCard, christmasCard]
 
 function App() {
   
-  const getCards = async () => {
-    
-  }
-
   return (
     <ContainerDiv>
       <TitleDiv>
-      <h2>Memories <img src={memoriesImg} style={{height:40}}></img></h2>
-      
+      <h2>Memories  <img src={memoriesImg} style={{height:40}}></img></h2>
       </TitleDiv>
       <MergedDiv>
         <Form />
-        {sampleCards.map(singleCard => <Card key={singleCard.creator} card={singleCard} />)}
+        <CardBox />
       </MergedDiv> 
     </ContainerDiv>
   );
