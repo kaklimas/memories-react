@@ -1,4 +1,5 @@
 import React from "react";
+
 import Card from "./components/Card";
 import styled from "styled-components";
 import Form from "./components/Form";
@@ -67,6 +68,11 @@ const sampleCards = [beachCard, dadsCard, christmasCard, beachCard, dadsCard, ch
   beachCard, dadsCard, christmasCard, beachCard, dadsCard, christmasCard]
 
 function App() {
+  
+  const getCards = async () => {
+    
+  }
+
   return (
     <ContainerDiv>
       <TitleDiv>
