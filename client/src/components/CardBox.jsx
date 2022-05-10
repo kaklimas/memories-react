@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from "axios";
+import styled from "styled-components";
 import NoCards from './NoCards';
 import Card from './Card'
 
@@ -36,14 +37,39 @@ const sampleCards = [beachCard, dadsCard, christmasCard, beachCard, dadsCard, ch
             beachCard, dadsCard, christmasCard, beachCard, dadsCard, christmasCard]
 
 
+const CardDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+`
 
 function CardBox() {
+    const [usersCards, setUsersCards] = useState([]);
     const serverPostsUrl = 'http://localhost:4000/app/posts'
-  
+
+    const fetchData = async () => {
+        await axios.get(serverPostsUrl)
+            .then((res) => {
+                const data = res.data
+                setUsersCards(data)
+            })
+            .catch((err) => console.log(err))
+
+    }
+    useEffect(() => {
+        fetchData()
+            .then()
+            .catch((err) => console.log(err))
+        usersCards.map(user => console.log(user.title))
+    })
     return (
-    <div>
-        {sampleCards.length > 0 ? sampleCards.map(card => <Card key={card.creator} card={card}/>) : <NoCards />}
-    </div>
+        <CardDiv>
+
+            {usersCards.length > 0 ? usersCards.map(card => <Card key={card.creator} card={card}/>) : <NoCards />}
+
+            {/*{sampleCards.length > 0 ? sampleCards.map(card => <Card key={card.creator} card={card}/>) : <NoCards />}*/}
+        </CardDiv>
   )
 }
 

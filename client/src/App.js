@@ -1,10 +1,11 @@
 import React from "react";
-
+import { useMediaQuery } from 'react-responsive';
 import styled from "styled-components";
 import Form from "./components/Form";
 
 import memoriesImg from './img/memories.png'
 import CardBox from "./components/CardBox";
+
 
 
 const MergedDiv = styled.div`
@@ -14,8 +15,8 @@ const MergedDiv = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  padding: 20px;
-  justify-content: space-around;
+  padding-top: 20px;
+
   
 `
 const TitleDiv = styled.div`
@@ -38,15 +39,19 @@ const ContainerDiv = styled.div`
 
 
 function App() {
-  
   return (
     <ContainerDiv>
       <TitleDiv>
-      <h2>Memories  <img src={memoriesImg} style={{height:40}}></img></h2>
+      <h2>Memories  <img src={memoriesImg} style={{height:40}} alt=''></img></h2>
       </TitleDiv>
       <MergedDiv>
-        <Form />
-        <CardBox />
+          <div style={{width:'40%'}}>
+              <Form />
+          </div>
+          <div style={{width:'60%'}}>
+              {/*<CardBox />*/}
+          </div>
+
       </MergedDiv> 
     </ContainerDiv>
   );
