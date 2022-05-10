@@ -35,6 +35,7 @@ const TitleDiv = styled.div`
 const ContainerDiv = styled.div`
   background-image: linear-gradient(to bottom right, rgb(18, 175, 247), lightblue);
   padding-top:20px;
+  min-height: 800px;
 `
 
 
@@ -49,7 +50,7 @@ function App() {
               <Form />
           </div>
           <div style={{width:'60%'}}>
-              {/*<CardBox />*/}
+              <CardBox />
           </div>
 
       </MergedDiv> 

@@ -48,6 +48,7 @@ function CardBox() {
     const [usersCards, setUsersCards] = useState([]);
     const serverPostsUrl = 'http://localhost:4000/app/posts'
 
+
     const fetchData = async () => {
         await axios.get(serverPostsUrl)
             .then((res) => {
@@ -61,14 +62,10 @@ function CardBox() {
         fetchData()
             .then()
             .catch((err) => console.log(err))
-        usersCards.map(user => console.log(user.title))
     })
     return (
         <CardDiv>
-
-            {usersCards.length > 0 ? usersCards.map(card => <Card key={card.creator} card={card}/>) : <NoCards />}
-
-            {/*{sampleCards.length > 0 ? sampleCards.map(card => <Card key={card.creator} card={card}/>) : <NoCards />}*/}
+            {usersCards.length > 0 ? usersCards.map(card => <Card key={card.id} card={card}/>) : <NoCards />}
         </CardDiv>
   )
 }

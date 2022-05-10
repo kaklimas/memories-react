@@ -29,36 +29,33 @@ function Form() {
     const getNextID = async () => {
         let best = 0
         await axios.get(getURL)
-            .then((res) => {
-                res.data.map((card) => {
-                    if (card.id > nextID) best = card.id;
-                    return card.id;
-                })
-            })
+            .then()
             .catch((err) => console.log(err))
-        setNextID(best)
+
+        // console.log('method', res)
     }
 
     const handleSubmit = async (event) => {
         event.preventDefault()
 
-        getNextID()
-            .then(async () => {
-                const data = {
-                    "id": nextID,
-                    "title": title,
-                    "message": message,
-                    "creator": creator,
-                    "tags": tags,
-                    "selectedFile": img
-                }
-                nextID > -1 ?
-                await axios.post(postURL, data)
-                    .then((res) => console.log(res))
-                    .catch((err) => console.log(err))
-                    : console.log('ID == -1!!')
-            })
-            .catch((err) => console.log(err))
+        // getNextID()
+        //     .then(async () => {
+        //         console.log('submit body', nextID)
+        //         const data = {
+        //             "id": nextID,
+        //             "title": title,
+        //             "message": message,
+        //             "creator": creator,
+        //             "tags": tags,
+        //             "selectedFile": img
+        //         }
+        //         nextID > -1 ?
+        //         await axios.post(postURL, data)
+        //             .then((res) => console.log(res))
+        //             .catch((err) => console.log(err))
+        //             : console.log('ID == -1!!')
+        //     })
+        //     .catch((err) => console.log(err))
     }
     const handleClear = () => {
         setImg('');

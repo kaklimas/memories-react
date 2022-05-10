@@ -10,7 +10,6 @@ const baseDeleteURL = 'http://localhost:4000/app/posts'
 function Card({card}) {
 
     const [title, creator, date, tags, src, content, id] = [card.title, card.creator, new Date(card.createdAt), card.tags, card.src, card.message, card.id];
-    console.log(card)
     const [imgSrc, setImgSrc] = useState(emptyHeart)
 
     const handleHeartClick = (event) => {
@@ -56,7 +55,7 @@ function Card({card}) {
         return `Posted ${now.getSeconds() - date.getSeconds()} seconds ago`
     }
     const getTags = () => {
-        return (tags.map(tag => <p>{`#${tag}`}</p>))
+        return (tags.map(tag => <p key={tag}>{`#${tag}`}</p>))
     }
 
     return (
