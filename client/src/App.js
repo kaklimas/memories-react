@@ -14,7 +14,7 @@ const MergedDiv = styled.div`
   margin-right:auto;
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+
   padding-top: 20px;
 
   
@@ -46,13 +46,8 @@ function App() {
       <h2>Memories  <img src={memoriesImg} style={{height:40}} alt=''></img></h2>
       </TitleDiv>
       <MergedDiv>
-          <div style={{width:'40%'}}>
-              <Form />
-          </div>
-          <div style={{width:'60%'}}>
-              <CardBox />
-          </div>
-
+          <Form />
+          <CardBox />
       </MergedDiv> 
     </ContainerDiv>
   );

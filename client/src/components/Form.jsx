@@ -22,12 +22,28 @@ function Form() {
     const [title, setTitle] = useState('');
     const [message, setMessage] = useState('');
     const [tags, setTags] = useState('')
-    const [img, setImg] = useState('');
+    const [selectedFile, setSelectedFile] = useState(null);
+
+
+    const convertBase64 = (file) => {
+        return new Promise((res, rej) => {
+            const fileReader = new FileReader();
+            fileReader.readAsDataURL(file);
+
+            fileReader.onload = () => {
+                res(fileReader.result)
+            };
+
+            fileReader.onerror = (err) => {
+                rej(err);
+            };
+        })
+    }
 
     const handleSubmit = async (event) => {
         event.preventDefault()
         await axios.get(getURL)
-            .then((res) => {
+            .then(async (res) => {
                 const resDataLength = res.data.length;
                 let maxID = -1
                 res.data.forEach(card => {
@@ -35,13 +51,15 @@ function Form() {
                 })
                 maxID++;
 
+                const base64 = await convertBase64(selectedFile)
+
                 const data = {
                     "id": maxID,
                     "title": title,
                     "message": message,
                     "creator": creator,
                     "tags": tags,
-                    "selectedFile": img
+                    "selectedFile": 'msg'
                 }
                 data.id > -1 ?
                     axios.post(postURL, data)
@@ -50,24 +68,15 @@ function Form() {
                     : console.log("data id == 0, ERR")
             })
             .catch((err) => console.log(err))
-        // getNextID()
-        //     .then(async () => {
-        //
-        //         nextID > -1 ?
-        //         await axios.post(postURL, data)
-        //             .then((res) => console.log(res))
-        //             .catch((err) => console.log(err))
-        //             : console.log('ID == -1!!')
-        //     })
-        //     .catch((err) => console.log(err))
         cleanUpInputs()
     }
     const cleanUpInputs = () => {
-        setImg('');
+        setSelectedFile(null);
         setTags('');
         setCreator('');
         setMessage('');
         setTitle('');
+        setSelectedFile('')
     }
 
 
@@ -95,8 +104,8 @@ function Form() {
                            placeholder='Tags (separated by commas)'></input>
                 </div>
                 <div className='mb-3'>
-                    <input required type="file" name="file" value={img}
-                           onChange={(event) => setImg(event.target.value)}/>
+                    <input required type="file" name="file" value={selectedFile}
+                           onChange={(event) => setSelectedFile(event.target.files[0])}/>
                 </div>
 
 

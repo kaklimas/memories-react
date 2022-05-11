@@ -4,12 +4,13 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import emptyHeart from '../img/emptyHeart.png'
 import fullHeart from '../img/fullHeart.png'
 import trashSrc from '../img/trash.png'
-import beachSrc from '../img/beach.png'
+import beachImg from '../img/beach.png'
+
 const baseDeleteURL = 'http://localhost:4000/app/posts'
 
 function Card({card}) {
 
-    const [title, creator, date, tags, src, content, id] = [card.title, card.creator, new Date(card.createdAt), card.tags, card.src, card.message, card.id];
+    const [title, creator, date, tags, base64, content, id] = [card.title, card.creator, new Date(card.createdAt), card.tags, card.selectedFile, card.message, card.id];
     const [imgSrc, setImgSrc] = useState(emptyHeart)
 
     const handleHeartClick = (event) => {
@@ -55,13 +56,14 @@ function Card({card}) {
         return `Posted ${now.getSeconds() - date.getSeconds()} seconds ago`
     }
     const getTags = () => {
-        return (tags.map(tag => <p key={tag}>{`#${tag}`}</p>))
+        return (tags.split(', ').map(tag => <p key={tag}>{`#${tag}`}</p>))
     }
 
     return (
         <div>
             <div className="card" style={{
                 width: 350,
+                marginLeft:50,
                 marginBottom: 50,
                 minHeight: 400,
                 border: 'none',
@@ -69,7 +71,7 @@ function Card({card}) {
                 borderTopRightRadius: 5
             }}>
                 <div style={{backgroundColor: 'black', borderTopLeftRadius: 5, borderTopRightRadius: 5}}>
-                    <img src={beachSrc} className="card-img-top" alt="/"
+                    <img src={beachImg} className="card-img-top" alt="/"
                          style={{height: 250, opacity: 0.5, borderTopLeftRadius: 5, borderTopRightRadius: 5}}></img>
                 </div>
                 <div className='card-description'
