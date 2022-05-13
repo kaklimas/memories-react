@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;1,200&display=swap');
+*{
+    font-family: 'Montserrat', sans-serif;
+}
+
+.merged_div{
+    flex-direction: row;
+}
+
+@media only screen and (max-width: 1450px) {
+    .merged_div{
+        flex-direction: column;
+        justify-content: center;
+    }
+}

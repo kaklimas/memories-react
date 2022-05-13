@@ -1,34 +1,67 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import emptyHeart from '../img/emptyHeart.png'
 import fullHeart from '../img/fullHeart.png'
 import trashSrc from '../img/trash.png'
 import beachImg from '../img/beach.png'
+import {get} from "react-hook-form";
 
-const baseDeleteURL = 'http://localhost:4000/app/posts'
+const getPostURL = 'http://localhost:4000/app/post'
+const baseURL = 'http://localhost:4000/app/posts'
+const postLike = 'http://localhost:4000/app/postlike'
+const postDislike = 'http://localhost:4000/app/postdislike'
 
 function Card({card}) {
 
-    const [title, creator, date, tags, base64, content, id] = [card.title, card.creator, new Date(card.createdAt), card.tags, card.selectedFile, card.message, card.id];
+    const [title, creator, date, tags, base64, content, id, likeCount] = [card.title, card.creator, new Date(card.createdAt), card.tags, card.selectedFile, card.message, card.id, card.likeCount];
+    const [likes, setLikes] = useState(likeCount)
     const [imgSrc, setImgSrc] = useState(emptyHeart)
 
-    const handleHeartClick = (event) => {
+
+
+
+    const handleHeartClick = async (event) => {
         event.preventDefault();
         if (imgSrc === emptyHeart) {
+            await axios.post(postLike + id)
+                .then()
+                .catch((err) => console.log(err))
             setImgSrc(fullHeart)
-        } else setImgSrc(emptyHeart)
+        } else {
+            await axios.post(postDislike + id)
+                .then()
+                .catch((err) => console.log(err))
+            setImgSrc(emptyHeart)
+        }
+        await getLikes()
     }
     const handleDeleteClick = async () => {
-        const deleteURL = baseDeleteURL + `${id}`
+        const deleteURL = baseURL + `${id}`
         await axios.delete(deleteURL)
             .then((res) => console.log(res))
             .catch((err) => console.log(err))
     }
 
-    const getLikes = () => {
-        return 1
+    const getLikes = async () => {
+        await axios.get(getPostURL + id)
+            .then((res) => {
+                setLikes(res.data.likeCount)
+            })
+            .catch((err) => console.log(err))
     }
+
+    useEffect(() => {
+        const getLikes = async () => {
+            await axios.get(getPostURL + id)
+                .then((res) => {
+                    setLikes(res.data.likeCount)
+                })
+                .catch((err) => console.log(err))
+        }
+        getLikes()
+            .catch((err) => console.log(err))
+    }, [])
 
     const calculateTime = () => {
         const now = new Date()
@@ -103,7 +136,7 @@ function Card({card}) {
                         <button style={{border: 'none', background: 'white', display: 'flex'}}
                                 onClick={handleHeartClick}>
                             <img src={imgSrc} alt='' style={{width: 25}}/>
-                            <p style={{marginLeft: 10}}>Like {getLikes()}</p>
+                            <p style={{marginLeft: 10}}>Like {likes}</p>
                         </button>
                         <button style={{border: 'none', background: 'white', display: 'flex'}}
                                 onClick={handleDeleteClick}>

@@ -5,15 +5,15 @@ import Form from "./components/Form";
 
 import memoriesImg from './img/memories.png'
 import CardBox from "./components/CardBox";
+import './App.css'
 
-
+// TODO likes should work and correct time
 
 const MergedDiv = styled.div`
   width: 85%;
   margin-left: auto;
   margin-right:auto;
   display: flex;
-  flex-direction: row;
 
   padding-top: 20px;
 
@@ -45,7 +45,7 @@ function App() {
       <TitleDiv>
       <h2>Memories  <img src={memoriesImg} style={{height:40}} alt=''></img></h2>
       </TitleDiv>
-      <MergedDiv>
+      <MergedDiv className='merged_div'>
           <Form />
           <CardBox />
       </MergedDiv> 

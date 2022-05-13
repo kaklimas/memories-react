@@ -22,7 +22,7 @@ function Form() {
     const [title, setTitle] = useState('');
     const [message, setMessage] = useState('');
     const [tags, setTags] = useState('')
-    const [selectedFile, setSelectedFile] = useState(null);
+    const [selectedFile, setSelectedFile] = useState('');
 
 
     const convertBase64 = (file) => {
@@ -71,12 +71,13 @@ function Form() {
         cleanUpInputs()
     }
     const cleanUpInputs = () => {
-        setSelectedFile(null);
+        setSelectedFile('');
         setTags('');
         setCreator('');
         setMessage('');
         setTitle('');
-        setSelectedFile('')
+        setSelectedFile('');
+        console.log(document.getElementById('file').attributes.value)
     }
 
 
@@ -104,7 +105,7 @@ function Form() {
                            placeholder='Tags (separated by commas)'></input>
                 </div>
                 <div className='mb-3'>
-                    <input required type="file" name="file" value={selectedFile}
+                    <input required type="file" name="file" id='file'
                            onChange={(event) => setSelectedFile(event.target.files[0])}/>
                 </div>
 
