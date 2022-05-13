@@ -1,4 +1,5 @@
 import express from 'express'
+
 const router = express.Router();
 import UserPosts from '../models/postMessages.js'
 
@@ -21,11 +22,46 @@ router.get('/posts', async (req, res) => {
     const allPosts = await UserPosts.find({})
     res.json(allPosts)
 })
-router.delete('/posts:id', async (req, res) => {
+router.get('/post:id', async (req, res) => {
     const postID = req.params.id
-    const deletedPost = await UserPosts.deleteOne({id: postID})
-    res.json(deletedPost)}
+    const post = await UserPosts.find({'id': postID})
+    res.json(post[0])
+})
+
+router.post('/postlike:id', async (req, res) => {
+    const postID = req.params.id
+    const filter = {'id': postID}
+
+    const likedPost = (await UserPosts.find(filter))[0]
+    const updateDoc = {
+        $set: {
+            likeCount: likedPost.likeCount + 1
+        }
+    }
+    const result = await UserPosts.updateOne(filter, updateDoc);
+    res.json(result)
+})
+router.post('/postdislike:id', async (req, res) => {
+    const postID = req.params.id
+    const filter = {'id': postID}
+
+    const likedPost = (await UserPosts.find(filter))[0]
+    const updateDoc = {
+        $set: {
+            likeCount: likedPost.likeCount - 1
+        }
+    }
+    const result = await UserPosts.updateOne(filter, updateDoc);
+    res.json(result)
+})
+
+router.delete('/posts:id', async (req, res) => {
+        const postID = req.params.id
+        const deletedPost = await UserPosts.deleteOne({id: postID})
+        res.json(deletedPost)
+    }
 )
+
 
 export default router
 
